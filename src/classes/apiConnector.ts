@@ -1,10 +1,10 @@
-import { Config } from 'src/models/config';
+import Config from 'src/models/config';
 import { WeatherResponse } from 'src/types/weatherResponse.type';
 
 /**
  * Api connector
  */
-export class ApiConnector {
+export default class ApiConnector {
   /**
    * Url  of api connector
    */

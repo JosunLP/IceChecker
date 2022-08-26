@@ -1,7 +1,8 @@
-import { Config } from 'src/models/config';
-import { ApiConnector } from './apiConnector';
-import { Helper } from './helper';
-import { Session } from './sessionHandler';
+import Config from 'src/models/config';
+import ApiConnector from './apiConnector';
+import Helper from './helper';
+import Message from './messageHandler';
+import Session from './sessionHandler';
 
 /**
  * Weather controller
@@ -22,8 +23,20 @@ export class WeatherController {
    */
   public temp = 0;
 
+  /**
+   * Creates an instance of weather controller.
+   */
   private constructor() {
     this.apiConnector = new ApiConnector(Config.apiUrl);
+    const msg = new Message();
+    Notification.requestPermission().then(function (result) {
+      if (result === 'granted') {
+        msg.success('Es können Benachrichtigungen erhalten werden.');
+      }
+      if (result === 'denied') {
+        msg.error('Es können keine Benachrichtigungen erhalten werden.');
+      }
+    });
   }
 
   /**
@@ -43,7 +56,7 @@ export class WeatherController {
    */
   public async run(): Promise<void> {
     const session = Session.getInstance();
-    // const temperature = 30;
+    // const temperature = 35;
     const audio = new Audio('/sounds/ice.mp3');
     const temperature = await this.getTemperature(
       session.coordinates.longitude,
@@ -56,6 +69,7 @@ export class WeatherController {
     ) {
       console.log('It is ice!');
       audio.play();
+      new Notification(Config.notificationText);
       document.dispatchEvent(
         new CustomEvent('fireworks', { detail: { temperature } })
       );

@@ -7,7 +7,7 @@
   >
     <q-card>
       <q-card-section class="row items-center">
-        <h2 class="q-ml-sm">🍧🍦 ES IST ZEIT FÜR EIN EIS!!! 🥳🥵</h2>
+        <h2 class="q-ml-sm">{{ notificationText }}</h2>
       </q-card-section>
 
       <q-card-actions align="center">
@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts">
+import Config from 'src/models/config';
 import { ref } from 'vue';
 
 export default {
@@ -38,6 +39,7 @@ export default {
   data(props: { iceTime: boolean }) {
     return {
       iceTimeTrigger: ref(props.iceTime),
+      notificationText: ref(Config.notificationText),
     };
   },
 };

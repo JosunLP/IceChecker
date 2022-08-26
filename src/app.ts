@@ -1,6 +1,6 @@
-import { Helper } from './classes/helper';
+import Helper from './classes/helper';
 import { WeatherController } from './classes/weatherController';
-import { Config } from './models/config';
+import Config from './models/config';
 
 /**
  * App

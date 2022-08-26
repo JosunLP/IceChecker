@@ -3,7 +3,7 @@ import { ApiUnits } from 'src/types/apiUnits.type';
 /**
  * Config
  */
-export class Config {
+export default class Config {
   /**
    * Api url of config
    */
@@ -23,4 +23,9 @@ export class Config {
    * Api call sleep of config
    */
   public static apiCallSleep = 600000;
+
+  /**
+   * Notification text of config
+   */
+  public static notificationText = '🍧🍦 ES IST ZEIT FÜR EIN EIS!!! 🥳🥵';
 }

@@ -1,11 +1,11 @@
 import { Coordinates } from 'src/types/coordinates.type';
-import { Helper } from './helper';
+import Helper from './helper';
 import Message from './messageHandler';
 
 /**
  * Session
  */
-export class Session {
+export default class Session {
   /**
    * Instance  of session
    */
@@ -46,6 +46,9 @@ export class Session {
     return Session.instance;
   }
 
+  /**
+   * Creates an instance of session.
+   */
   private constructor() {
     this.iceTimeStamp = 0;
     this.coordinates = {

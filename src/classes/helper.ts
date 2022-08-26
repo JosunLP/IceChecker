@@ -1,7 +1,7 @@
 /**
  * Helper
  */
-export class Helper {
+export default class Helper {
   public static generateUUid(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
       /[xy]/g,
