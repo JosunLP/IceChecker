@@ -1,5 +1,5 @@
 import Helper from './classes/helper';
-import { WeatherController } from './classes/weatherController';
+import WeatherController from './classes/weatherController';
 import Config from './models/config';
 
 /**

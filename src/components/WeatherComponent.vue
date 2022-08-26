@@ -31,7 +31,7 @@ import Message from 'src/classes/messageHandler';
 import { App } from 'src/app';
 import IcePopupComponent from './IcePopupComponent.vue';
 import Config from 'src/models/config';
-import { WeatherController } from 'src/classes/weatherController';
+import WeatherController from 'src/classes/weatherController';
 import Helper from 'src/classes/helper';
 
 const lc = new LocationController();

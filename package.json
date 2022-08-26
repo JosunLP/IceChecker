@@ -1,6 +1,6 @@
 {
   "name": "icechecker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A software tool to check, if its valid to get a ice",
   "productName": "Ice Checker",
   "author": "Jonas Pfalzgraf <info@josunlp.de>",
@@ -9,8 +9,8 @@
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,,html,md,json}\" --ignore-path .gitignore",
     "dev": "quasar dev",
-    "build": "quasar build",
-    "build:pwa": "quasar build -m pwa",
+    "build": "npm t && quasar build",
+    "build:pwa": "npm t && quasar build -m pwa",
     "test": "jest"
   },
   "dependencies": {

@@ -104,6 +104,8 @@ npm install
 ### Starten Sie die Anwendung im Entwicklungsmodus (Nachladen von Hot-Code, Fehlerberichte usw.)
 
 ```bash
+npm run dev
+# or
 quasar dev
 ```
 
@@ -126,6 +128,8 @@ npm run format
 ### Bauen Sie die Anwendung für die Produktion
 
 ```bash
+npm run build
+# or
 quasar build
 ```
 
