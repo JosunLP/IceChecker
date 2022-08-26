@@ -7,7 +7,7 @@ import Session from './sessionHandler';
 /**
  * Weather controller
  */
-export class WeatherController {
+export default class WeatherController {
   /**
    * Api connector of weather controller
    */

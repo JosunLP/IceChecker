@@ -1,4 +1,4 @@
-import { MessageType } from 'src/types/message.type';
+import { MessageType } from '../types/message.type';
 import Helper from './helper';
 
 /**

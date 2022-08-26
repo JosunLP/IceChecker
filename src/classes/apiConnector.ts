@@ -1,5 +1,5 @@
-import Config from 'src/models/config';
-import { WeatherResponse } from 'src/types/weatherResponse.type';
+import Config from '../models/config';
+import { WeatherResponse } from '../types/weatherResponse.type';
 
 /**
  * Api connector
