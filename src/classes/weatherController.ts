@@ -1,5 +1,7 @@
 import { Config } from 'src/models/config';
 import { ApiConnector } from './apiConnector';
+import { Helper } from './helper';
+import { Session } from './sessionHandler';
 
 /**
  * Weather controller
@@ -10,8 +12,55 @@ export class WeatherController {
    */
   private apiConnector: ApiConnector;
 
-  constructor() {
+  /**
+   * Instance  of weather controller
+   */
+  private static instance: WeatherController;
+
+  /**
+   * Temp  of weather controller
+   */
+  public temp = 0;
+
+  private constructor() {
     this.apiConnector = new ApiConnector(Config.apiUrl);
+  }
+
+  /**
+   * Gets instance
+   * @returns instance
+   */
+  public static getInstance(): WeatherController {
+    if (!WeatherController.instance) {
+      WeatherController.instance = new WeatherController();
+    }
+    return WeatherController.instance;
+  }
+
+  /**
+   * Runs weather controller
+   * @returns run
+   */
+  public async run(): Promise<void> {
+    const session = Session.getInstance();
+    // const temperature = 30;
+    const audio = new Audio('/sounds/ice.mp3');
+    const temperature = await this.getTemperature(
+      session.coordinates.longitude,
+      session.coordinates.latitude
+    );
+    this.temp = temperature;
+    if (
+      this.determineIfIce(temperature) &&
+      Helper.checkIfTimeStampIsLongerThen24HoursAgo(session.iceTimeStamp)
+    ) {
+      console.log('It is ice!');
+      audio.play();
+      document.dispatchEvent(
+        new CustomEvent('fireworks', { detail: { temperature } })
+      );
+      session.iceTimeStamp = Helper.getCurrentTimeStamp();
+    }
   }
 
   /**

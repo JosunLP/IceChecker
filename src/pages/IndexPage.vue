@@ -1,49 +1,37 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
-  </q-page>
+  <div id="wrapper">
+    <div id="message_container"></div>
+    <q-page class="row items-center justify-evenly">
+      <q-img alt="logo" src="../assets/logo.svg" id="logo" />
+      <weather-component />
+    </q-page>
+  </div>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
-import { defineComponent, ref } from 'vue';
+import WeatherComponent from 'components/WeatherComponent.vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'IndexPage',
-  components: { ExampleComponent },
-  setup () {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1'
-      },
-      {
-        id: 2,
-        content: 'ct2'
-      },
-      {
-        id: 3,
-        content: 'ct3'
-      },
-      {
-        id: 4,
-        content: 'ct4'
-      },
-      {
-        id: 5,
-        content: 'ct5'
-      }
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200
-    });
-    return { todos, meta };
-  }
+  components: { WeatherComponent },
 });
 </script>
+
+<style lang="sass" scoped>
+@import "../css/_mixin"
+
+#logo
+    width: 20rem
+    height: auto
+
+    @include noselect
+
+#wrapper
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+</style>

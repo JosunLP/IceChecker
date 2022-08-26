@@ -1,5 +1,5 @@
 import { MessageType } from 'src/types/message.type';
-import { H } from 'friendly-helper';
+import { Helper } from './helper';
 
 /**
  * Message
@@ -16,7 +16,7 @@ export default class Message {
       document.getElementById('message_container')
     );
     messageContainer.appendChild(messageElement);
-    await H.general.sleep(3000);
+    await Helper.sleep(3000);
     messageContainer.removeChild(messageElement);
   }
 

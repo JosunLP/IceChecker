@@ -1,5 +1,6 @@
-import { H } from 'friendly-helper';
-import Message from './MessageHandler';
+import { Coordinates } from 'src/types/coordinates.type';
+import { Helper } from './helper';
+import Message from './messageHandler';
 
 /**
  * Session
@@ -16,9 +17,19 @@ export class Session {
   private static msg = new Message();
 
   /**
+   * Ice time stamp of session
+   */
+  public iceTimeStamp: number;
+
+  /**
+   * Coordinates  of session
+   */
+  public coordinates: Coordinates;
+
+  /**
    * Session id of session
    */
-  public readonly sessionId: string = H.guid.generate();
+  public readonly sessionId: string = Helper.generateUUid();
 
   /**
    * Gets instance
@@ -35,11 +46,12 @@ export class Session {
     return Session.instance;
   }
 
-  /**
-   * Creates an instance of session.
-   */
   private constructor() {
-    Session.instance = this;
+    this.iceTimeStamp = 0;
+    this.coordinates = {
+      latitude: 0,
+      longitude: 0,
+    };
   }
 
   /**
@@ -58,6 +70,8 @@ export class Session {
     if (session) {
       const obj = <Session>JSON.parse(session);
       const result = new Session();
+      result.iceTimeStamp = obj.iceTimeStamp;
+      result.coordinates = obj.coordinates;
       return result;
     }
     return null;
@@ -71,6 +85,8 @@ export class Session {
     if (session) {
       const obj = <Session>JSON.parse(session);
       const result = new Session();
+      result.iceTimeStamp = obj.iceTimeStamp;
+      result.coordinates = obj.coordinates;
       Session.instance = result;
     }
   }
