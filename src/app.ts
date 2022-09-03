@@ -1,5 +1,5 @@
 import Helper from './classes/helper';
-import WeatherController from './classes/weatherController';
+import WeatherHandler from './classes/weatherHandler';
 import Config from './models/config';
 
 /**
@@ -32,7 +32,7 @@ export class App {
    * Mains app
    */
   private async main(): Promise<void> {
-    const weather = WeatherController.getInstance();
+    const weather = WeatherHandler.getInstance();
     while (true) {
       while (this.active) {
         weather.run();
