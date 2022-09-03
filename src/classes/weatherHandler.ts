@@ -7,7 +7,7 @@ import Session from './sessionHandler';
 /**
  * Weather controller
  */
-export default class WeatherController {
+export default class WeatherHandler {
   /**
    * Api connector of weather controller
    */
@@ -16,7 +16,7 @@ export default class WeatherController {
   /**
    * Instance  of weather controller
    */
-  private static instance: WeatherController;
+  private static instance: WeatherHandler;
 
   /**
    * Temp  of weather controller
@@ -43,11 +43,11 @@ export default class WeatherController {
    * Gets instance
    * @returns instance
    */
-  public static getInstance(): WeatherController {
-    if (!WeatherController.instance) {
-      WeatherController.instance = new WeatherController();
+  public static getInstance(): WeatherHandler {
+    if (!WeatherHandler.instance) {
+      WeatherHandler.instance = new WeatherHandler();
     }
-    return WeatherController.instance;
+    return WeatherHandler.instance;
   }
 
   /**
@@ -65,9 +65,8 @@ export default class WeatherController {
     this.temp = temperature;
     if (
       this.determineIfIce(temperature) &&
-      Helper.checkIfTimeStampIsLongerThen24HoursAgo(session.iceTimeStamp)
+      Helper.isDateBeforeToday(session.iceTimeStamp)
     ) {
-      console.log('It is ice!');
       audio.play();
       new Notification(Config.notificationText);
       document.dispatchEvent(

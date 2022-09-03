@@ -38,15 +38,14 @@ export default class Helper {
   }
 
   /**
-   * Checks if time stamp is longer then24 hours ago
-   * @param timeStamp
-   * @returns true if if time stamp is longer then24 hours ago
+   * Determines whether date before today is
+   * @param date
+   * @returns true if date before today
    */
-  public static checkIfTimeStampIsLongerThen24HoursAgo(
-    timeStamp: number
-  ): boolean {
-    const currentTimeStamp = this.getCurrentTimeStamp();
-    return currentTimeStamp - timeStamp > 86400000;
+  public static isDateBeforeToday(date: number): boolean {
+    const nowDate = new Date().setHours(0, 0, 0, 0);
+    const dateDate = new Date(date).setHours(0, 0, 0, 0);
+    return dateDate < nowDate;
   }
 
   /**

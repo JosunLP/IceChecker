@@ -3,7 +3,7 @@ import Message from './messageHandler';
 /**
  * Location controller
  */
-export default class LocationController {
+export default class LocationHandler {
   /**
    * Message Controller of location controller
    */

@@ -9,9 +9,7 @@ describe('Helper', () => {
     Helper.getCurrentDate = jest
       .fn()
       .mockReturnValue(new Date().toISOString().split('T')[0]);
-    Helper.checkIfTimeStampIsLongerThen24HoursAgo = jest
-      .fn()
-      .mockReturnValue(true);
+    Helper.isDateBeforeToday = jest.fn().mockReturnValue(true);
     Helper.sleep = jest
       .fn()
       .mockReturnValue(new Promise((resolve) => setTimeout(resolve, 0)));
@@ -30,11 +28,9 @@ describe('Helper', () => {
       );
     }),
     test('checkIfTimeStampIsLongerThen24HoursAgo', () => {
-      expect(
-        Helper.checkIfTimeStampIsLongerThen24HoursAgo(new Date().getTime())
-      ).toBe(true);
+      expect(Helper.isDateBeforeToday(new Date().getTime())).toBe(true);
     }),
     test('sleep', () => {
       expect(Helper.sleep(0)).toBeInstanceOf(Promise);
-    });
+    })
 });
