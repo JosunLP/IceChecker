@@ -58,7 +58,13 @@ export default class WeatherHandler {
   public async run(): Promise<void> {
     const session = Session.getInstance();
     // const temperature = 35;
-    const audio = new Audio('/sounds/ice.mp3');
+    let audio;
+    const mode = Helper.getTimeMode();
+    if (mode === 'summer') {
+      audio = new Audio(Config.audio.summer);
+    } else {
+      audio = new Audio(Config.audio.winter);
+    }
     const temperature = await this.getTemperature(
       session.coordinates.longitude,
       session.coordinates.latitude
@@ -116,7 +122,7 @@ export default class WeatherHandler {
         return false;
 
       default:
-        false;
+        return false;
     }
   }
 }

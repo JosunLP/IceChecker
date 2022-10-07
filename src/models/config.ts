@@ -42,4 +42,9 @@ export default class Config {
    */
   public static notificationTextWinter =
     '☕️🤶🏽 ES IST ZEIT FÜR EINEN GLÜHWEIN!!! 🎄🎅🏼';
+
+  public static audio = {
+    summer: '/sounds/ice.mp3',
+    winter: '/sounds/wine.mp3',
+  };
 }
