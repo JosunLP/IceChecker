@@ -29,7 +29,7 @@ export default class Session {
   /**
    * Session id of session
    */
-  public readonly sessionId: string = Helper.generateUUid();
+  public sessionId: string = Helper.generateUUid();
 
   /**
    * Gets instance
@@ -75,6 +75,7 @@ export default class Session {
       const result = new Session();
       result.iceTimeStamp = obj.iceTimeStamp;
       result.coordinates = obj.coordinates;
+      result.sessionId = obj.sessionId;
       return result;
     }
     return null;
@@ -90,6 +91,7 @@ export default class Session {
       const result = new Session();
       result.iceTimeStamp = obj.iceTimeStamp;
       result.coordinates = obj.coordinates;
+      result.sessionId = obj.sessionId;
       Session.instance = result;
     }
   }

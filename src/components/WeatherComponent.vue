@@ -25,13 +25,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import LocationController from 'src/classes/locationController';
+import LocationController from 'src/classes/locationHandler';
 import Session from 'src/classes/sessionHandler';
 import Message from 'src/classes/messageHandler';
 import { App } from 'src/app';
 import IcePopupComponent from './IcePopupComponent.vue';
 import Config from 'src/models/config';
-import WeatherController from 'src/classes/weatherController';
+import WeatherController from 'src/classes/weatherHandler';
 import Helper from 'src/classes/helper';
 
 const lc = new LocationController();
