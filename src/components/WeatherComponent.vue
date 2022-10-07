@@ -19,7 +19,7 @@
         <q-btn @click="resetSession()" color="red">App zurücksetzen</q-btn>
       </div>
     </div>
-    <ice-popup-component v-if="iceTime" :iceTime="iceTime" />
+    <summer-popup-component v-if="iceTime" :iceTime="iceTime" />
   </div>
 </template>
 
@@ -29,7 +29,7 @@ import LocationController from 'src/classes/locationHandler';
 import Session from 'src/classes/sessionHandler';
 import Message from 'src/classes/messageHandler';
 import { App } from 'src/app';
-import IcePopupComponent from './IcePopupComponent.vue';
+import SummerPopupComponent from './SummerPopupComponent.vue';
 import Config from 'src/models/config';
 import WeatherController from 'src/classes/weatherHandler';
 import Helper from 'src/classes/helper';
@@ -40,7 +40,7 @@ const app = App.getInstance();
 export default defineComponent({
   name: 'ExampleComponent',
   components: {
-    IcePopupComponent,
+    SummerPopupComponent,
   },
 
   data() {

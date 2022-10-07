@@ -1,3 +1,4 @@
+import { TimeMode } from './../types/timeMode.type';
 import Config from 'src/models/config';
 import ApiConnector from './apiConnector';
 import Helper from './helper';
@@ -64,11 +65,20 @@ export default class WeatherHandler {
     );
     this.temp = temperature;
     if (
-      this.determineIfIce(temperature) &&
+      this.determineIfTemperature(temperature, mode) &&
       Helper.isDateBeforeToday(session.iceTimeStamp)
     ) {
       audio.play();
-      new Notification(Config.notificationText);
+      switch (mode) {
+        case 'summer':
+          new Notification(Config.notificationTextSummer);
+          break;
+        case 'winter':
+          new Notification(Config.notificationTextWinter);
+          break;
+        default:
+          break;
+      }
       document.dispatchEvent(
         new CustomEvent('fireworks', { detail: { temperature } })
       );
@@ -91,10 +101,22 @@ export default class WeatherHandler {
    * @param temperature
    * @returns true if if ice
    */
-  private determineIfIce(temperature: number): boolean {
-    if (temperature >= 30) {
-      return true;
+  private determineIfTemperature(temperature: number, mode: TimeMode): boolean {
+    switch (mode) {
+      case 'summer':
+        if (temperature >= Config.temperature.summer) {
+          return true;
+        }
+        return false;
+
+      case 'winter':
+        if (temperature <= Config.temperature.winter) {
+          return true;
+        }
+        return false;
+
+      default:
+        false;
     }
-    return false;
   }
 }
