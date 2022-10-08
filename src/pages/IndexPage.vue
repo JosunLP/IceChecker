@@ -46,6 +46,7 @@ export default defineComponent({
       default:
         break;
     }
+    this.decideColorTheme();
   },
 
   methods: {
@@ -54,11 +55,11 @@ export default defineComponent({
      * @param {string} mode
      */
     changeFavicon(mode: TimeMode) {
-      let src:string;
-      let src16:string;
-      let src32:string;
-      let src96:string;
-      let src128:string;
+      let src: string;
+      let src16: string;
+      let src32: string;
+      let src96: string;
+      let src128: string;
 
       switch (mode) {
         case 'winter':
@@ -81,13 +82,34 @@ export default defineComponent({
       const favicon16 = <HTMLLinkElement>document.getElementById('favicon-16');
       const favicon32 = <HTMLLinkElement>document.getElementById('favicon-32');
       const favicon96 = <HTMLLinkElement>document.getElementById('favicon-96');
-      const favicon128 = <HTMLLinkElement>document.getElementById('favicon-128');
+      const favicon128 = <HTMLLinkElement>(
+        document.getElementById('favicon-128')
+      );
 
       favicon.href = src;
       favicon16.href = src16;
       favicon32.href = src32;
       favicon96.href = src96;
       favicon128.href = src128;
+    },
+
+    decideColorTheme() {
+      const mode = Helper.getTimeMode();
+      let body: HTMLBodyElement;
+      switch (mode) {
+        case 'winter':
+          body = document.getElementsByTagName('body')[0];
+          body.id = 'winterTime';
+          break;
+
+        case 'summer':
+          body = document.getElementsByTagName('body')[0];
+          body.id = 'summerTime';
+          break;
+
+        default:
+          break;
+      }
     },
   },
 });

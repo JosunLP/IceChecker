@@ -1,8 +1,8 @@
 <template>
   <div id="weather_app">
     <div id="headline">
-      <h1>Ice Checker</h1>
-      <h2>Ist es warm genug, für ein Eis für alle?</h2>
+      <h1>{{title}}</h1>
+      <h2>{{tagline}}</h2>
       <h3>Aktuelle Temperatur: {{ temperature }} {{ system }}</h3>
       <div id="config" class="row justify-evenly">
         <q-btn class="btn-control" @click="getCoordinates()">Wo bin ich?</q-btn>
@@ -53,10 +53,13 @@ export default defineComponent({
       iceTime: ref(false),
       temperature: ref(0),
       system: ref(''),
+      title: ref('Ice Checker'),
+      tagline: ref('Ist es warm genug, für ein Eis für alle?'),
     };
   },
 
   methods: {
+
     async getCoordinates() {
       Session.reloadSession();
       let session = Session.getInstance();
@@ -91,6 +94,25 @@ export default defineComponent({
         this.system = 'C';
       } else {
         this.system = 'F';
+      }
+    },
+
+    decideTextForTime() {
+      const mode = Helper.getTimeMode();
+
+      switch (mode) {
+        case 'winter':
+          this.title = 'Glühwein Checker';
+          this.tagline = 'Ist es kalt genug, für einen Glühwein für alle?';
+          break;
+
+        case 'summer':
+          this.title = 'Eis Checker';
+          this.tagline = 'Ist es warm genug, für ein Eis für alle?';
+          break;
+
+        default:
+          break;
       }
     },
 
@@ -138,6 +160,7 @@ export default defineComponent({
     this.setNewEvent();
     this.decideSystem();
     this.setTemperature();
+    this.decideTextForTime();
   },
 });
 </script>
