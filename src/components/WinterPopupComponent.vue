@@ -1,8 +1,7 @@
 <template>
   <q-dialog
-    v-model="iceTimeTrigger"
+    v-model="chaiTimeTrigger"
     id="modalDialog"
-    @load="fireWork()"
     persistent
   >
     <q-card>
@@ -13,7 +12,7 @@
       <q-card-actions align="center">
         <q-btn
           flat
-          label="Schließen und Eis hohlen!"
+          label="Schließen und Glühwein hohlen!"
           color="blue"
           v-close-popup
         ></q-btn>
@@ -27,19 +26,19 @@ import Config from 'src/models/config';
 import { ref } from 'vue';
 
 export default {
-  name: 'IcePopupComponent',
+  name: 'WinterPopupComponent',
 
   props: {
-    iceTime: {
+    chaiTime: {
       type: Boolean,
       default: false,
     },
   },
 
-  data(props: { iceTime: boolean }) {
+  data(props: { chaiTime: boolean }) {
     return {
-      iceTimeTrigger: ref(props.iceTime),
-      notificationText: ref(Config.notificationText),
+      chaiTimeTrigger: ref(props.chaiTime),
+      notificationText: ref(Config.notificationTextWinter),
     };
   },
 };
