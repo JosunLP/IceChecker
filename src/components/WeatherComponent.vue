@@ -19,6 +19,7 @@
         <q-btn @click="resetSession()" color="red">App zurücksetzen</q-btn>
       </div>
     </div>
+    <winter-popup-component v-if="chaiTime" :chaiTime="chaiTime" />
     <summer-popup-component v-if="iceTime" :iceTime="iceTime" />
   </div>
 </template>
@@ -33,6 +34,7 @@ import SummerPopupComponent from './SummerPopupComponent.vue';
 import Config from 'src/models/config';
 import WeatherController from 'src/classes/weatherHandler';
 import Helper from 'src/classes/helper';
+import WinterPopupComponent from './WinterPopupComponent.vue';
 
 const lc = new LocationController();
 const app = App.getInstance();
@@ -41,7 +43,8 @@ export default defineComponent({
   name: 'ExampleComponent',
   components: {
     SummerPopupComponent,
-  },
+    WinterPopupComponent
+},
 
   data() {
     return {
@@ -51,6 +54,7 @@ export default defineComponent({
       },
       appRunning: ref(app.active),
       iceTime: ref(false),
+      chaiTime: ref(false),
       temperature: ref(0),
       system: ref(''),
       title: ref('Ice Checker'),
@@ -126,7 +130,19 @@ export default defineComponent({
 
     setNewEvent() {
       document.addEventListener('fireworks', () => {
-        this.iceTime = true;
+        const mode = Helper.getTimeMode();
+        switch (mode) {
+          case 'winter':
+            this.chaiTime = true;
+            break;
+
+          case 'summer':
+            this.iceTime = true;
+            break;
+
+          default:
+            break;
+        }
       });
     },
 
