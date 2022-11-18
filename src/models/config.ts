@@ -12,7 +12,7 @@ export default class Config {
   /**
    * Api key of config
    */
-  public static apiKey = '9cf58ae8c607d1de8bd1e30fdb4edfa8';
+  public static apiKey = '--YOUR-API-KEY--';
 
   /**
    * Api units of config
