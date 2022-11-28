@@ -1,3 +1,5 @@
+import { TimeMode } from 'src/types/timeMode.type';
+
 /**
  * Helper
  */
@@ -55,5 +57,25 @@ export default class Helper {
    */
   public static async sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  /**
+   * Times of the year
+   * @returns
+   */
+  public static getTimeMode(): TimeMode {
+    const month = new Date().getMonth();
+    if (month >= 3 && month <= 8) {
+      return 'summer';
+    }
+    return 'winter';
+  }
+
+  /**
+   * Changes page title
+   * @param title
+   */
+  public static changePageTitle(title: string) {
+    document.title = title;
   }
 }
