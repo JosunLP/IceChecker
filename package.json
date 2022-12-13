@@ -1,9 +1,12 @@
 {
   "name": "icechecker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A software tool to check, if its valid to get a ice",
   "productName": "Ice Checker",
-  "author": "Jonas Pfalzgraf <info@josunlp.de>",
+  "author": {
+    "name": "Jonas Pfalzgraf",
+    "email": "info@josunlp.de"
+  },
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
