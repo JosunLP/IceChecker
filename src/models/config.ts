@@ -12,7 +12,7 @@ export default class Config {
   /**
    * Api key of config
    */
-  public static apiKey = '9cf58ae8c607d1de8bd1e30fdb4edfa8';
+  public static apiKey = '--YOUR-API-KEY--';
 
   /**
    * Api units of config
@@ -25,7 +25,26 @@ export default class Config {
   public static apiCallSleep = 600000;
 
   /**
-   * Notification text of config
+   * Temperature  of config
    */
-  public static notificationText = '🍧🍦 ES IST ZEIT FÜR EIN EIS!!! 🥳🥵';
+  public static temperature = {
+    winter: 7,
+    summer: 30,
+  };
+
+  /**
+   * Notification text of config summer
+   */
+  public static notificationTextSummer = '🍧🍦 ES IST ZEIT FÜR EIN EIS!!! 🥳🥵';
+
+  /**
+   * Notification text of config summer
+   */
+  public static notificationTextWinter =
+    '☕️🤶🏽 ES IST ZEIT FÜR EINEN GLÜHWEIN!!! 🎄🎅🏼';
+
+  public static audio = {
+    summer: '/sounds/ice.mp3',
+    winter: '/sounds/wine.mp3',
+  };
 }

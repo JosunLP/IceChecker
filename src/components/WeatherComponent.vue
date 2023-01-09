@@ -1,8 +1,8 @@
 <template>
   <div id="weather_app">
     <div id="headline">
-      <h1>Ice Checker</h1>
-      <h2>Ist es warm genug, für ein Eis für alle?</h2>
+      <h1>{{title}}</h1>
+      <h2>{{tagline}}</h2>
       <h3>Aktuelle Temperatur: {{ temperature }} {{ system }}</h3>
       <div id="config" class="row justify-evenly">
         <q-btn class="btn-control" @click="getCoordinates()">Wo bin ich?</q-btn>
@@ -19,7 +19,8 @@
         <q-btn @click="resetSession()" color="red">App zurücksetzen</q-btn>
       </div>
     </div>
-    <ice-popup-component v-if="iceTime" :iceTime="iceTime" />
+    <winter-popup-component v-if="chaiTime" :chaiTime="chaiTime" />
+    <summer-popup-component v-if="iceTime" :iceTime="iceTime" />
   </div>
 </template>
 
@@ -29,10 +30,11 @@ import LocationController from 'src/classes/locationHandler';
 import Session from 'src/classes/sessionHandler';
 import Message from 'src/classes/messageHandler';
 import { App } from 'src/app';
-import IcePopupComponent from './IcePopupComponent.vue';
+import SummerPopupComponent from './SummerPopupComponent.vue';
 import Config from 'src/models/config';
 import WeatherController from 'src/classes/weatherHandler';
 import Helper from 'src/classes/helper';
+import WinterPopupComponent from './WinterPopupComponent.vue';
 
 const lc = new LocationController();
 const app = App.getInstance();
@@ -40,8 +42,9 @@ const app = App.getInstance();
 export default defineComponent({
   name: 'ExampleComponent',
   components: {
-    IcePopupComponent,
-  },
+    SummerPopupComponent,
+    WinterPopupComponent
+},
 
   data() {
     return {
@@ -51,12 +54,16 @@ export default defineComponent({
       },
       appRunning: ref(app.active),
       iceTime: ref(false),
+      chaiTime: ref(false),
       temperature: ref(0),
       system: ref(''),
+      title: ref('Ice Checker'),
+      tagline: ref('Ist es warm genug, für ein Eis für alle?'),
     };
   },
 
   methods: {
+
     async getCoordinates() {
       Session.reloadSession();
       let session = Session.getInstance();
@@ -94,6 +101,25 @@ export default defineComponent({
       }
     },
 
+    decideTextForTime() {
+      const mode = Helper.getTimeMode();
+
+      switch (mode) {
+        case 'winter':
+          this.title = 'Glühwein Checker';
+          this.tagline = 'Ist es kalt genug, für einen Glühwein für alle?';
+          break;
+
+        case 'summer':
+          this.title = 'Eis Checker';
+          this.tagline = 'Ist es warm genug, für ein Eis für alle?';
+          break;
+
+        default:
+          break;
+      }
+    },
+
     async setTemperature() {
       while (true) {
         const weather = WeatherController.getInstance();
@@ -104,7 +130,19 @@ export default defineComponent({
 
     setNewEvent() {
       document.addEventListener('fireworks', () => {
-        this.iceTime = true;
+        const mode = Helper.getTimeMode();
+        switch (mode) {
+          case 'winter':
+            this.chaiTime = true;
+            break;
+
+          case 'summer':
+            this.iceTime = true;
+            break;
+
+          default:
+            break;
+        }
       });
     },
 
@@ -138,6 +176,7 @@ export default defineComponent({
     this.setNewEvent();
     this.decideSystem();
     this.setTemperature();
+    this.decideTextForTime();
   },
 });
 </script>
